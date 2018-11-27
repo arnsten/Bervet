@@ -1,15 +1,15 @@
 function E = total_consumption(x, route, n)
 %TOTAL_CONSUMPTION Uppskattad elkonsumtion.
 %   n - antal deliterval i trapetsmetod.
-%   Uppskattning använder trapetsmetod för att lösa integral 
+%   Uppskattning anvÃ¤nder trapetsmetod fÃ¶r att lÃ¶sa integral 
 %   E(x) = (0,x) S c(v(s)) ds
 
     routeData = load([route '.mat']);
     isValidRange = (x >= 0) & (x <= max(routeData.distance_km));
     if all(isValidRange) == false
-        error('Fel. \nX x måste vara större än 0 och mindre än största körsträcka.');
+        error('Fel. \nX x mÃ¥ste vara stÃ¶rre Ã¤n 0 och mindre Ã¤n stÃ¶rsta kÃ¶rstrÃ¤cka.');
     end
-    s = linspace(0, x, n);
+    s = linspace(0, x, n+1);
     Vs = velocity(s, route);
     Cs = consumption(Vs);
     
