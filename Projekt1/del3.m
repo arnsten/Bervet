@@ -5,6 +5,7 @@ routeElsa = load('speed_elsa.mat');
 route = 'speed_anna';
 x = max(routeAnna.distance_km)
 N = 2.^(10:20);
+H = x ./ (N-1);
 E = [];
 err = [];
 for i = 1:length(N)
@@ -14,14 +15,14 @@ end
 for i = 1:length(E)-1
     err(i) = abs(E(i)-E(i+1))
 end
-loglog( N(1:end-1), err);
+loglog( H(1:end-1), err);
 % noggrannhetsordning p
 % lämplig konstant C
-p = 0.0001;
-C = err(1) / (N(1)^-p);
-hlpl = C*N(1:end-1).^-p;
+p = 2;
+C = err(9)/ (H(9)^p);
+hlpl = C * H.^p;
 hold on;
-plot (hlpl);
+loglog (H, hlpl);
 hold off;
 %annaConsTotal = total_consumption(max(routeAnna.distance_km), 'speed_anna', 10)
 %elsaConsTotal = total_consumption(max(routeElsa.distance_km), 'speed_elsa', 10)
