@@ -1,12 +1,18 @@
 
+function x = newtonSolver(f, xstart, hstart, epsilon)
+    fPrimeExp = diff(f);
+    fPrime = matlabFunction(fPrimeExp);
+    fFunc = matlabFunction(f);
+    x = xstart;
+    h = hstart;
+    while abs(h) > epsilon
+        b = -fFunc(x);
+        a = fPrime(x);
+        h = b/a;
+        x = x + h;
+    end    
+end
 
-plussa(1, 3)
-
-f1 = @(a, b) a + b;
-f2 = @(f1, c) f1 - c;
-f3 = @plussa;
-
-
-function summa = plussa(a, b)
-    summa = a + b;
+function x = reach(C, route)
+    
 end
